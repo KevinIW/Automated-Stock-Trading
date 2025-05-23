@@ -1,0 +1,19 @@
+% https://tex.stackexchange.com/questions/15971/bibliography-with-page-numbers
+% \usepackage[hidelinks, bookmarksnumbered]{hyperref}
+\usepackage[hidelinks, bookmarksnumbered, backref=page]{hyperref}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 (Broken backref)
+  \or        (page~#2)
+  \else      (pages~#2)
+  \fi
+}
+
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor   = blue
+}
+
+\usepackage{url}            % simple URL typesetting

@@ -1,0 +1,46 @@
+% https://tex.stackexchange.com/questions/10684/vertical-space-in-lists
+% https://www.overleaf.com/learn/latex/lists
+% \renewcommand{\labelenumi}{\roman{enumi}.} # global/whole settings
+% https://www.texfaq.org/FAQ-enumerate
+\usepackage{enumitem}
+\setlist{nosep}
+
+% https://texblog.org/2015/12/08/custom-colors-in-latex/
+\usepackage{xcolor}
+\colorlet{darkgreen}{green!50!black}
+
+% https://en.wikibooks.org/wiki/LaTeX/Colors
+\definecolor{stateblue}{cmyk}{0.96,0,0,0}
+\definecolor{lightgray}{gray}{0.85}
+\definecolor{halfgreen}{rgb}{0,0.5,0}
+
+% https://tex.stackexchange.com/questions/19017/how-to-place-a-table-on-a-new-page-with-landscape-orientation-without-clearing-t
+% https://tex.stackexchange.com/questions/337/how-to-change-certain-pages-into-landscape-portrait-mode
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\usepackage{lipsum}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+
+% https://ctan.uib.no/macros/latex/contrib/import/import.pdf
+% https://github.com/SublimeText/LaTeXTools/issues/1083
+\usepackage{import}
+
+% https://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter
+% https://tex.stackexchange.com/questions/96650/width-of-epigraphs
+\usepackage{epigraph}
+
+\newcommand{\ask}[1]{{\color{blue}ASK #1}}
+\newcommand{\todo}[1]{{\color{red}TODO #1}}
+\newcommand{\answer}[1]{{\color{red}\textbf{Answer:} #1}}
+
+% https://tex.stackexchange.com/questions/40915/best-package-for-developing-a-list-of-abbreviations
+\usepackage{acronym}
+
+% https://tex.stackexchange.com/questions/194426/split-itemize-into-multiple-columns
+\usepackage{multicol}

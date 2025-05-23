@@ -1,0 +1,91 @@
+% https://stackoverflow.com/questions/5372129/short-name-for-algorithm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CITATION
+% https://www.economics.utoronto.ca/osborne/latex/BIBTEX.HTM
+% https://tex.stackexchange.com/questions/166097/natbib-multiple-citations-with-page-numbers-in-one-bracket
+% \citetext{\citealp[p.~1]{ref1}; \citealp[p.~2]{ref2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WITH labels
+% \eqref is already defined for "... (equNumber) ..."
+\newcommand{\algref}[1]{Algo~\ref{#1}}
+\newcommand{\algrefand}[2]{Algo~\ref{#1} and~\ref{#2}}
+\newcommand{\alglineref}[2]{Algo~\ref{#1}: Line~\ref{#2}}
+\newcommand{\appref}[1]{Appendix~\ref{#1}} % `App` looks strange and weird
+\newcommand{\apprefand}[2]{Appendices~\ref{#1} and~\ref{#2}}
+\newcommand{\assref}[1]{Assumption~\ref{#1}}
+
+\newcommand{\chref}[1]{Chapter~\ref{#1}}
+\newcommand{\chrefb}[2]{Chapters~\ref{#1} and~\ref{#2}}
+\newcommand{\chrefand}[2]{Chapters~\ref{#1} and~\ref{#2}}
+\newcommand{\chrefc}[3]{Chapters~\ref{#1}, \ref{#2} and~\ref{#3}}
+\newcommand{\chrefd}[4]{Chapters~\ref{#1}, \ref{#2}, \ref{#3} and~\ref{#4}}
+\newcommand{\defref}[1]{Def~\ref{#1}}
+
+% \newcommand{\eqreff}[1]{Eqn~\ref{#1}}
+\newcommand{\eqreff}[1]{\eqref{#1}}
+% \newcommand{\eqreffb}[2]{Eqn~\ref{#1} and~\ref{#2}}
+% \newcommand{\eqreffand}[2]{Eqn~\ref{#1} and~\ref{#2}}
+\newcommand{\eqreffand}[2]{(\ref{#1},~\ref{#2})}
+\newcommand{\eqrefand}[2]{(\ref{#1},~\ref{#2})}
+\newcommand{\eqrefandc}[3]{(\ref{#1},~\ref{#2},~\ref{#3})}
+
+\newcommand{\figref}[1]{Fig~\ref{#1}}
+\newcommand{\figrefb}[2]{Figs~\ref{#1} and~\ref{#2}}
+\newcommand{\figrefand}[2]{Figs~\ref{#1} and~\ref{#2}}
+\newcommand{\figrefc}[3]{Figs~\ref{#1}, \ref{#2}, and \ref{#3}}
+\newcommand{\figrefd}[4]{Figs~\ref{#1}, \ref{#2}, \ref{#3}, and \ref{#4}}
+\newcommand{\figreff}[6]{Figs~\ref{#1}, \ref{#2}, \ref{#3}, \ref{#4}, \ref{#5}, and \ref{#6}}
+\newcommand{\fnoteref}[1]{Footnote~\ref{#1}}
+
+\newcommand{\itemref}[1]{Item~\ref{#1}}
+
+\newcommand{\lineref}[1]{Line~\ref{#1}}
+\newcommand{\lmmref}[1]{Lemma~\ref{#1}}
+\newcommand{\lmmrefand}[2]{Lemmas~\ref{#1} and~\ref{#2}}
+\newcommand{\propref}[1]{Prop~\ref{#1}}
+\newcommand{\pgref}[1]{Page~\pageref{#1}}
+
+\newcommand{\secref}[1]{Sec~\ref{#1}}
+\newcommand{\secrefb}[2]{Secs~\ref{#1} and \ref{#2}}
+\newcommand{\secrefc}[3]{Secs~\ref{#1}, \ref{#2} and \ref{#3}}
+\newcommand{\secrefand}[2]{Secs~\ref{#1} and \ref{#2}}
+
+\newcommand{\thmref}[1]{Thm~\ref{#1}}
+\newcommand{\tblref}[1]{Table~\ref{#1}}
+\newcommand{\tblrefand}[2]{Tables~\ref{#1} and~\ref{#2}}
+\newcommand{\tblrefto}[2]{Tables~\ref{#1} to~\ref{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% WITHOUT labels
+% \sec is already defined
+\newcommand{\alg}[1]{Algo~#1}
+\newcommand{\algb}[2]{Algo~#1 and #2}
+\newcommand{\app}[1]{Appendix~#1}
+\newcommand{\assume}[1]{Assumption~#1}
+
+\newcommand{\ch}[1]{Ch~#1}
+\newcommand{\chb}[2]{Chapters~#1 and {#2}}
+\newcommand{\cor}[1]{Corollary~#1} % Corollary
+
+\newcommand{\deff}[1]{Def~#1}
+
+\newcommand{\equ}[1]{Eqn~#1}
+\newcommand{\ex}[1]{Example~#1}
+
+\newcommand{\fig}[1]{Fig~#1}
+\newcommand{\fnote}[1]{Footnote~#1}
+
+\newcommand{\lmm}[1]{Lemma~#1}
+
+\newcommand{\page}[1]{p#1}
+\newcommand{\pageb}[2]{Pages~#1 and {#2}}
+\newcommand{\pageto}[2]{Pages~#1-#2}
+\newcommand{\prop}[1]{Prop~#1}
+\newcommand{\problem}[1]{Problem~#1}
+
+\newcommand{\tbl}[1]{Table~#1}
+\newcommand{\secc}[1]{Sec~#1}
+\newcommand{\seccb}[2]{Secs~{#1}, {#2}}
+
+\newcommand{\thm}[1]{Thm~#1}
+\newcommand{\thmb}[2]{Thm~#1 and #2}
+\newcommand{\thmc}[3]{Thm~#1, #2, and #3}

@@ -1,0 +1,179 @@
+% MDP special states and actions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\szrat}{s_{\mathrm{zrat}}} % zrat: zero reward absorbing terminal
+\newcommand{\azrat}{a_{\mathrm{zrat}}}
+\newcommand{\pzrat}{p_{\mathrm{zrat}}}
+\newcommand{\rzrat}{r_{\mathrm{zrat}}}
+\newcommand{\isdzrat}{\isd_{\mathrm{zrat}}}
+\newcommand{\ssetzrat}{ \setname{S}_{\mathrm{zrat}}^+ }
+\newcommand{\asetzrat}{ \setname{A}_{\mathrm{zrat}}^+ }
+
+\newcommand{\sreset}{s_{\mathrm{rst}}}
+\newcommand{\areset}{a_{\mathrm{rst}}}
+\newcommand{\preset}{p_{\mathrm{rst}}}
+\newcommand{\rreset}{r_{\mathrm{rst}}}
+\newcommand{\isdreset}{\isd_{\mathrm{rst}}}
+\newcommand{\ssetreset}{ \setname{S}_{\mathrm{rst}}^+ }
+\newcommand{\asetreset}{ \setname{A}_{\mathrm{rst}}^+ }
+
+\newcommand{\sref}{s_{\mathrm{ref}}}
+\newcommand{\srefcand}{\tilde{s}_{\mathrm{ref}}} % sref candidate
+
+\newcommand{\aref}{a_{\mathrm{ref}}}
+
+\newcommand{\strans}{s_{\mathrm{tr}}}
+\newcommand{\srecur}{s_{\mathrm{re}}}
+
+\newcommand{\strrv}{S_{\mathrm{tr}}} % random variable
+\newcommand{\srerv}{S_{\mathrm{re}}} % random variable
+
+% MDP matrices and vectors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% https://tex.stackexchange.com/questions/352993/adjusting-subscript-distance-by-redefining-command
+\newcommand{\diagpts}{\mat{D}_{\!\!p^t}^{\!\frac{1}{2}}}
+\newcommand{\diagpt}{\mat{D}_{\!\!p{^{t}}}}
+\newcommand{\diagpstar}{\mat{D}_{\!\!\vecb{p}^{\!\star}}}
+\newcommand{\diagptilde}{\mat{D}_{\!\tilde{\vecb{p}}}}
+\newcommand{\diagptildesqrt}{ \mat{D}_{\!\tilde{\vecb{p}}}^{\!\frac{1}{2}} }
+\newcommand{\diagsvd}{\mat{D}_{\!\!\sigma}}
+\newcommand{\diagsvds}{\mat{D}_{\!\!\sigma}^2}
+\newcommand{\diageig}{\mat{D}_{\!\!\mu}}
+
+\newcommand{\ppimat}{\mat{P}_{\!\!\pi}} % one-step transition matrix under pi
+\newcommand{\ppimatc}{P_{\!\!\pi}}
+\newcommand{\dpimat}{\mat{H}_{\!\!\pi}} % deviation matrix under pi
+\newcommand{\ptrmat}{ \mat{P}_{\!\!\mathrm{tr}} } % transient part of P
+\newcommand{\ptrremat}{ \mat{P}_{\!\!\mathrm{tr} \to \mathrm{re}} }
+
+\newcommand{\rpivec}{\vecb{r}_{\!\!\pi}}
+\newcommand{\rpi}{r_{\!\pi}}
+
+\newcommand{\vgvec}{\vecb{v}_{\!g}} % gain vector
+\newcommand{\vbvec}{\vecb{v}_{\!b}} % bias vector
+\newcommand{\vbhatvec}{\hat{\vecb{v}}_{\!b}} % bias vector: approximation
+\newcommand{\qbvec}{\vecb{q}_{\!b}} % bias vector: action value
+\newcommand{\qbhatvec}{\hat{\vecb{q}}_{\!b}} % bias vector: action value: approximation
+
+% MDP sets %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\piset}[1]{\Pi_{\mathrm{#1}}}
+
+\newcommand{\settrans}{\mathcal{S}_{\mathrm{tr}}}
+\newcommand{\settr}{\settrans}
+\newcommand{\settrsize}{ |\settr| }
+
+\newcommand{\setrecur}{\mathcal{S}_{\mathrm{re}}}
+\newcommand{\srefset}{\mathcal{S}_{\mathrm{ref}}}
+
+% MDP distrib %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \newcommand{\isd}{p_{\mathsf{s}_0}} % isd: init state distrib
+% \newcommand{\isd}{p_{s_0}} % isd: init state distrib
+\newcommand{\isd}{\mathring{p}} % isd: init state distrib
+\newcommand{\isdvec}{\mathring{\vecb{p}}}
+\newcommand{\isdvecrow}{ \isdvec^{\!\intercal} }
+\newcommand{\trajd}{p_{\!\xi}} % trajectory distrib
+
+% MDP special time %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tmax}{t_{\mathrm{max}}}
+\newcommand{\tmaxrv}{T_{\mathrm{max}}} % rv: random variable
+\newcommand{\tmaxhat}{\hat{t}_{\mathrm{max}}} % training budget, approx the infinity horizon
+
+\newcommand{\txepmax}{\hat{t}_{\mathrm{max}}^{\mathrm{xep}}} % xep: experiment episodes
+\newcommand{\tepmax}{\hat{t}_{\mathrm{max}}^{\mathrm{xep}}} % old command
+\newcommand{\txepmaxi}{\hat{t}_{\mathrm{max}}^{\mathrm{xep}(i)}} % xep: experiment episodes
+\newcommand{\tepmaxi}{\hat{t}_{\mathrm{max}}^{\mathrm{xep}(i)}} % old command
+\newcommand{\tmaxeps}{\hat{t}_{\mathrm{max}}^{\epsilon}}
+\newcommand{\txep}{t_{\mathrm{xep}}}
+\newcommand{\tnow}{t_{\mathrm{now}}}
+
+\newcommand{\tmix}{t_{ \mathrm{mix}} } % mixing time
+\newcommand{\tabs}{t_{\!\mathrm{abs}}}
+\newcommand{\tabspi}{t_{\!\mathrm{abs}(\pi)}}
+\newcommand{\tabshat}{\hat{t}_{\mathrm{abs}}}
+\newcommand{\tabsrv}{T_{\mathrm{abs}}}
+
+% seems the scaling using `\scaleto' CANNOT compile in Table/Figure caption
+\newcommand{\tabsmax}{\tabs^{\scaleto{\mathrm{max}\mathstrut}{5pt}}} % err in fig caption
+\newcommand{\tabsmaxb}{\tabs^{\mathrm{max}}}
+\newcommand{\tabsmaxc}{ t_{\mathrm{abs:max}} }
+% \newcommand{\tabsmin}{\tabs^{\scaleto{\mathrm{min}\mathstrut}{5pt}}}
+\newcommand{\tabsmin}{ t_{\mathrm{abs:min}} }
+% \newcommand{\tabsminpiso}{ t_{\scaleto{\mathrm{abs:min}\mathstrut}{6.5pt}}^{\pi,s_0} }
+\newcommand{\tabsminpiso}{ t_{\mathrm{abs:min}}^{\pi,s_0} }
+% \newcommand{\tabsminhat}{ \hat{t}_{\scaleto{\mathrm{abs:min}\mathstrut}{6.5pt}} } % err in fig caption
+\newcommand{\tabsminhat}{ \hat{t}_{\mathrm{abs:min}} }
+\newcommand{\tabsminhatb}{ \hat{t}_{\mathrm{abs:min}} }
+\newcommand{\tabsminpi}{\tabspi^{\scaleto{\mathrm{min}\mathstrut}{5pt}}}
+
+% MDP misc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\adv}{\mathrm{a}} % action advantage
+\newcommand{\rmax}{r_{\mathrm{max}}}
+
+\newcommand{\ems}{\tilde{e}_\mathrm{MS}} % (weighted) mean squares error
+\newcommand{\emst}{e_\mathrm{MS}^t}
+\newcommand{\emstot}{\varepsilon_\mathrm{MS}}
+
+% The mean squared projected Bellman error, epb,
+% we use tilde because this epb is with general PSD state distrib `ptilde`,
+% while plain `p` is for one-step state distrib
+\newcommand{\epb}{\tilde{e}_{\mathbb{PB}}}
+\newcommand{\epbt}{e_{\mathbb{PB}}^{t}} % stepwise epb
+\newcommand{\epbtot}{ \varepsilon_{\mathbb{PB}} }
+
+\newcommand{\bo}{\mathbb{B}} % Bellman operator
+\newcommand{\po}{\mathbb{P}} % projection (to the parameter space) soperator
+\newcommand{\B}[2]{\mathbb{B}^{#1} \left[ #2 \right]} % Bellman operator
+
+\newcommand{\nanchor}{n_{\mathrm{a}}} % n anchor timesteps
+\newcommand{\nanchormax}{n_{\mathrm{a}}^{\mathrm{max}}}
+\newcommand{\nsample}{n_{\mathrm{sam}}} % n samples: general samples
+
+\newcommand{\nvis}{n_{\mathrm{vis}}} % number of visit
+\newcommand{\nvisrv}{N_{\mathrm{vis}}} % number of visit
+
+\newcommand{\nxep}{n_{\mathrm{xep}}}
+\newcommand{\nxeplast}{n_{\mathrm{xep}}^{\mathrm{last}}}
+\newcommand{\ntr}{n_{\mathrm{tr}}}
+\newcommand{\ntslast}{n_{\mathrm{ts}}^{\mathrm{last}}}
+\newcommand{\nrecur}{n_{\mathrm{re}}}
+\newcommand{\nrep}{n_{\mathrm{rep}}} % repetitions
+
+\newcommand{\gammabw}{\gamma_{\mathrm{Bw}}} % The Blackwell's gamma
+\newcommand{\pistarbw}{\pi^*_{\mathrm{Bw}}}
+\newcommand{\pistarbwset}{\Pi^*_{\mathrm{Bw}}}
+
+\newcommand{\psitot}{\psi_{\mathrm{tot}}^{\mathrm{all}}}
+\newcommand{\psitotasy}{\bar{\psi}_{\mathrm{tot}}^{\mathrm{final}}}
+\newcommand{\Psitotasy}{\Psi_{\mathrm{tot}}^{\mathrm{last}}}
+\newcommand{\psigasy}{\psi_g^{\mathrm{last}}}
+\newcommand{\psigasybar}{\widebar{\psi}_g^{\mathrm{last}}}
+\newcommand{\Psigasy}{\Psi_g^{\mathrm{last}}}
+\newcommand{\psigtot}{\psi_g^{\mathrm{all}}}
+
+% Function approximation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fsatheta}{ \vecb{f}_{\!\!\vecb{\theta}} } % theta compatible f(s, a)
+
+\newcommand{\wg}{\vecb{w}_{\!\!g}} % weight for gain
+\newcommand{\wtd}{\vecb{w}_{\mathrm{TD}}}
+\newcommand{\zpinvsqrt}{ \mat{Z}^{\nicefrac{\dagger}{2}} }
+
+\newcommand{\famat}{\mat{\Phi}_{\!a}} % Fisher action matrix
+\newcommand{\fsmat}{\mat{\Phi}_{\!s}} % Fisher state matrix
+\newcommand{\fgamat}{\mat{\Phi}_{\!ga}} % Fisher gain, action matrix
+\newcommand{\fgamathat}{\hat{\mat{\Phi}}_{\!ga}}
+\newcommand{\fgamatbar}{\bar{\mat{\Phi}}_{\!ga}}
+\newcommand{\fgsmat}{\mat{\Phi}_{\!gs}} % Fisher gain, state matrix
+\newcommand{\fgsamat}{\mat{\Phi}_{\!gsa}} % Fisher gain, state-action matrix
+\newcommand{\fbamat}{\mat{\Phi}_{\!ba}} % Fisher bias, action matrix
+\newcommand{\fbamathat}{\hat{\mat{\Phi}}_{\!ba}}
+\newcommand{\fbamatbar}{\bar{\mat{\Phi}}_{\!ba}}
+\newcommand{\fbamatsam}{\tilde{\mat{\Phi}}_{\!ba}} % Fisher bias, action matrix
+\newcommand{\fbsamatsam}{\tilde{\mat{\Phi}}_{\!bsa}} % Fisher bias, action matrix: sampling
+\newcommand{\ftimat}{\mat{\Phi}_{\!\xi(\infty)}} % Fisher trajectory infinity matrix
+\newcommand{\ftlmat}{\mat{\Phi}_{\!\xi(\tau)}} % Fisher trajectory finite length matrix
+\newcommand{\fdamat}{\mat{\Phi}_{\!\gamma a}} % Fisher discounted (gamma) action matrix
+
+% Probability distance metric %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\kldiv}{\Delta_{\mathrm{KL}}}
+\newcommand{\totvar}{\Delta_{\mathrm{TV}}}
+
+% Misc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bigO}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\Ot}[1]{\tilde{\mathcal{O}}\left(#1\right)}

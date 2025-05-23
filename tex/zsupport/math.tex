@@ -1,0 +1,86 @@
+% https://tex.stackexchange.com/questions/36175/what-do-newcommand-renewcommand-and-providecommand-do-and-how-do-they-differ
+% https://tex.stackexchange.com/questions/163280/underbar-changing-the-style-of-font-but-bar-not-why
+
+% https://tex.stackexchange.com/questions/341717/smaller-font-for-subscript-within-subscript-in-math-mode
+\usepackage{scalerel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{bbm} % for `\mathbbm{b}`
+
+% https://tex.stackexchange.com/questions/479/lowercase-mathcal
+\usepackage{dutchcal}
+
+% https://tex.stackexchange.com/questions/118173/how-to-write-ceil-and-floor-in-latex
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% Math operator macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\clip}{\mathrm{clip}}
+\newcommand{\cov}[1]{\mathrm{Cov}(#1)}
+\newcommand{\diag}{\mathrm{diag}}
+
+\newcommand{\E}[2]{\mathbb{E}_{#1} \left[ #2 \right]} % expectation
+
+\newcommand{\interior}[1]{\mathrm{interior}(#1)}
+
+\newcommand{\norm}[1]{\|#1\|} % for ordinary vectors
+\newcommand{\normm}[1]{\left\|#1\right\|}
+\newcommand{\nullspace}{\mathrm{Null}}
+
+\newcommand{\partdiff}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\partdiffb}[2]{\frac{\partial #2}{\partial #1}}
+
+\newcommand{\rank}{\mathrm{rank}}
+
+\newcommand{\ud}{\mathrm{d}}
+
+\newcommand{\prob}[1]{\mathrm{Pr}\{#1\}}
+
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\real}[1]{\mathbb{R}^{#1}}
+\newcommand{\integer}[1]{\mathbb{Z}^{#1}}
+\newcommand{\naturall}[1]{\mathbb{N}^{#1}}
+
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\setname}[1]{\mathcal{#1}}
+\newcommand{\setsize}[1]{|\mathcal{#1}|}
+\newcommand{\setsizesubt}[1]{|\mathcal{#1}_t|}
+\newcommand{\setsizesubx}[2]{|\mathcal{#1}_{#2}|}
+
+% http://statweb.stanford.edu/~owen/courses/363/scribe_template.tex
+\newcommand{\simiid}{\stackrel{\mathrm{iid}}{\sim}}
+
+% https://tex.stackexchange.com/questions/111544/what-is-the-capital-greek-letter-for-tau
+\newcommand{\Tau}{\mathrm{T}}
+\newcommand{\trace}{\mathrm{trace}}
+\newcommand{\var}{\mathrm{var}}
+
+\newcommand{\spanspace}{\mathrm{span}}
+
+\newcommand{\eqset}{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily set}}}{=}}}
+
+% https://tex.stackexchange.com/questions/4216/how-to-typeset-correctly
+% \newcommand{\eqdef}{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand{\eqdef}{\coloneqq}
+\newcommand{\eqdefr}{\eqqcolon}
+
+\newcommand{\widebar}[1]{\overline{#1}}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+% `\mathbf{}` does not work for eg \hat{\mat{}}
+\newcommand{\vecb}[1]{\boldsymbol{#1}}
+\newcommand{\mat}[1]{\boldsymbol{#1}}
+
+% https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right/
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}

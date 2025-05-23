@@ -1,0 +1,44 @@
+% https://tex.stackexchange.com/questions/57152/how-to-draw-graphs-in-latex
+% https://tex.stackexchange.com/questions/300098/draw-a-node-as-a-square-with-tikz
+% https://tex.stackexchange.com/questions/350049/tikz-pgfplots-how-to-make-tikzpcture-fit-the-parent-figure-subfigure-float-envi/
+% https://rmwu.github.io/tutorial/latex/2019/11/21/positioning/
+% https://texample.net/tikz/examples/
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, backgrounds}
+% \usetikzlibrary{positioning, shapes, shadows, arrows}
+
+% https://tex.stackexchange.com/questions/5461/is-it-possible-to-change-the-size-of-an-arrowhead-in-tikz-pgf/161238#161238
+% https://tex.stackexchange.com/questions/409881/self-loop-arrowhead-different-cannot-change
+% https://github.com/pgf-tikz/pgf/issues/1008
+    % [>={Arrowtype}] this means "make all arrows {ArrowType}" and you supply this to generic style settings.
+    % [-{Arrowtype}] this means "put an end arrow head {ArrowType}" and you supply this style to paths and edges
+\usetikzlibrary{arrows.meta}
+
+% https://tex.stackexchange.com/questions/13625/subcaption-vs-subfig-best-package-for-referencing-a-subfigure
+% https://tex.stackexchange.com/questions/333249/controlling-subfigure-captions-and-subfigure-placement
+% https://tex.stackexchange.com/questions/13150/subfigures-with-tikz-on-the-same-line
+% http://www.peteryu.ca/tutorials/publishing/latex_captions
+% \usepackage{subfigure} % clash with `subcaption`
+% \usepackage{subfig}
+\usepackage{subcaption}
+
+% https://tex.stackexchange.com/questions/110513/unknown-graphics-extension-1-png
+\usepackage{grffile}
+
+% https://tex.stackexchange.com/questions/8532/is-eps-or-pdf-the-preferred-figure-format-when-typesetting-in-latex
+% https://tex.stackexchange.com/questions/45498/choosing-whether-to-include-pdf-or-png-in-pdflatex
+% https://www.overleaf.com/learn/latex/Managing_images
+% https://www.overleaf.com/learn/how-to/Why_do_I_keep_getting_the_compile_timeout_error_message%3F
+\usepackage{graphicx} % Allows including images
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+
+% https://tex.stackexchange.com/questions/50070/landscape-figure-in-latex
+% https://tex.stackexchange.com/questions/37600/how-to-rotate-a-group-of-figures-subfigure
+% https://tex.stackexchange.com/questions/471472/how-to-make-figures-appear-landscape-properly
+% https://tex.stackexchange.com/questions/438798/how-to-get-landscape-float-with-correct-numbering
+% https://tex.stackexchange.com/questions/159988/sidewaysfigure-and-landscape
+\usepackage{rotating}
+
+% https://www.overleaf.com/learn/latex/wrapping_text_around_figures
+% https://tex.stackexchange.com/questions/31764/white-space-under-wrapfigure-caption
+\usepackage{wrapfig}
