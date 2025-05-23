@@ -1,5 +1,5 @@
 #!/bin/bash
-OUT_FNAME=m2-2206810042.pdf # `m?-yournpm`
+OUT_FNAME=m4-2206810042.pdf # `m?-yournpm`
 BUILD_DIR=../build
 ROOT_TEX=main
 OUT_DIR=../

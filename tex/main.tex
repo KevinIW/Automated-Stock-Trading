@@ -22,13 +22,13 @@
 \maketitle
 
 \begin{abstract}
-This paper presents a Reinforcement Learning (RL) approach for automated trading on real S\&P 500 historical data. We incorporate buy/sell actions (10\% buys, 1\% sells) to achieve a more granular control of portfolio allocation, while employing Deep Q-Networks (DQN) and Proximal Policy Optimization (PPO) for policy learning. Our comparative analysis reveals significant performance differences between these algorithms in trading environments. We evaluate our approach with fixed seeds for reproducibility, yielding detailed insights on reward trajectories, learning stability, and financial performance metrics including portfolio value, ROI, Sharpe ratio, and maximum drawdown. Furthermore, we discuss potential enhancements inspired by recent hybrid deep reinforcement learning approaches for pairs trading \citep{kim2022hybrid}, which decompose the decision-making process into separate networks for trading actions and risk management. Our experiments demonstrate that the DQN algorithm's value-based approach consistently outperforms PPO's policy gradient method in this particular trading environment with discrete action spaces and delayed rewards.
+This paper presents a Reinforcement Learning (RL) approach for automated trading on real S\&P 500 historical data. We incorporate buy/sell actions (10\% buys, 1\% sells) to achieve a more granular control of portfolio allocation, while employing Deep Q-Networks (DQN) and Proximal Policy Optimization (PPO) for policy learning. Our comparative analysis reveals significant performance differences between these algorithms in trading environments. We evaluate our approach with fixed seeds for reproducibility, yielding detailed insights on reward trajectories, learning stability, and financial performance metrics including portfolio value, ROI, Sharpe ratio, and maximum drawdown. Our experiments demonstrate that the DQN algorithm's value-based approach consistently outperforms PPO's policy gradient method in this particular trading environment with discrete action spaces and delayed rewards.
 \end{abstract}
 
 \section{Introduction}
 Algorithmic trading has rapidly evolved, driven by both improved computational power and advances in data-driven methods. Traditional strategies (e.g., mean reversion, momentum trading) rely on fixed heuristics, often lacking adaptability to changing market conditions. In contrast, Reinforcement Learning (RL) optimizes trading decisions by directly interacting with an environment and receiving feedback in the form of rewards \citep{sutton_2018_irl}.
 
-While many works focus on single-asset trading, recent literature in pairs trading has shown that decomposing the trading problem into multiple subtasks can be highly beneficial. For instance, \citep{kim2022hybrid} propose a hybrid deep reinforcement learning method for pairs trading that uses two separate networks: one to determine trading actions and another to set stop-loss boundaries. This dual-network approach, coupled with techniques such as dimensionality reduction, clustering, and behavior cloning, can lead to superior risk management and improved performance. Although our study focuses on single-asset trading with partial buy/sell actions, the insights from hybrid models offer promising avenues for future research and potential integration.
+While many works focus on single-asset trading, recent literature in pairs trading has shown that decomposing the trading problem into multiple subtasks can be highly beneficial. Although our study focuses on single-asset trading with partial buy/sell actions, the insights from hybrid models offer promising avenues for future research and potential integration.
 
 In this study, we extend previous work by conducting a comprehensive analysis of two popular reinforcement learning algorithms: Deep Q-Networks (DQN) and Proximal Policy Optimization (PPO). We investigate their comparative performance in a trading environment with partial buy/sell capabilities, analyzing their learning dynamics, stability characteristics, and financial outcomes.
 
@@ -38,14 +38,6 @@ In this study, we extend previous work by conducting a comprehensive analysis of
 RL directly learns a policy that maximizes cumulative rewards, such as changes in portfolio value after accounting for transaction costs. Foundational work by \citet{sutton_2018_irl} laid the groundwork for modern RL approaches, while recent studies have applied various RL algorithms (e.g., DQN, PPO, A2C) to financial markets. However, standard RL approaches often rely on simplistic buy/sell/hold actions, leading to abrupt position changes.
 
 Value-based methods like DQN \citep{mnih2015human} learn the expected return of each action in a given state, selecting the action with the highest expected value. Policy gradient methods like PPO \citep{schulman2017proximal}, in contrast, directly optimize a policy that maps states to actions, often providing more stable learning in continuous action spaces but potentially struggling with the sparse, delayed rewards typical in trading environments.
-
-\subsection{Hybrid Approaches in Trading}
-Recent research has explored the benefits of hybrid models in trading. In pairs trading, \citep{kim2022hybrid} propose a novel method that employs two independent RL networks: one for trading actions and one for stop-loss boundaries. Their approach integrates dimensionality reduction, clustering, regression, behavior cloning, prioritized experience replay, and dynamic delay to overcome limitations of traditional methods. Although our current study does not employ a dual-network system, these ideas inspire potential future enhancements, such as:
-\begin{itemize}
-  \item \textbf{Risk Management:} Incorporating a separate network to determine stop-loss boundaries or dynamic risk adjustments.
-  \item \textbf{Feature Enrichment:} Utilizing techniques like clustering and dimensionality reduction to extract more robust state representations.
-  \item \textbf{Behavior Cloning:} Leveraging expert demonstrations to guide policy learning.
-\end{itemize}
 
 \section{Methodology}
 \subsection{Buy/Sell Environment}
@@ -170,34 +162,53 @@ PPO is a policy gradient method that directly optimizes the policy using clipped
 \section{Results and Discussion}
 
 \subsection{Policy Behavior}
-An excerpt of the DQN agent's policy shows its decision-making in the trading environment:
+The trained agents demonstrate distinct policy behaviors in the trading environment. Below we present excerpts from our best-performing DQN and PPO models that showcase their decision-making patterns.
+
+\subsubsection{DQN Policy (Seed 1002, ROI: 6.45\%)}
+An excerpt of the DQN agent's policy shows its consistent decision-making in the trading environment:
 \begin{verbatim}
 Step 0: Price=$5137.08, Position=0.00, Cash=1.00 → Buy 5%
-Step 1: Price=$5123.41, Position=0.10, Cash=0.95 → Buy 5%
+Step 1: Price=$5135.04, Position=0.10, Cash=0.90 → Buy 5%
+Step 2: Price=$5132.99, Position=0.19, Cash=0.81 → Buy 5%
+Step 3: Price=$5130.95, Position=0.27, Cash=0.73 → Buy 5%
+Step 4: Price=$5078.65, Position=0.34, Cash=0.66 → Buy 5%
+Step 5: Price=$5104.76, Position=0.41, Cash=0.59 → Buy 5%
+Step 6: Price=$5157.36, Position=0.47, Cash=0.53 → Buy 5%
+Step 7: Price=$5123.69, Position=0.52, Cash=0.48 → Buy 5%
+Step 8: Price=$5121.77, Position=0.57, Cash=0.43 → Buy 5%
+Step 9: Price=$5119.86, Position=0.61, Cash=0.39 → Buy 5%
 ...
-Step 143: Price=$5045.63, Position=0.99, Cash=0.01 → Hold
-Step 144: Price=$5046.00, Position=0.99, Cash=0.01 → Hold
+Step 145: Price=$5427.13, Position=1.00, Cash=$0.01 → Hold
+Step 146: Price=$5399.22, Position=1.00, Cash=$0.01 → Hold
+Step 147: Price=$5459.10, Position=1.00, Cash=$0.01 → Hold
+Step 148: Price=$5460.58, Position=1.00, Cash=$0.01 → Hold
+Step 149: Price=$5462.06, Position=1.00, Cash=$0.01 → Hold
 \end{verbatim}
-The policy adopts a gradual approach, buying with available cash in the early phases and then switching to a holding strategy as the position increases and cash reserves diminish.
 
-\subsection{Portfolio Value and ROI}
-Our best DQN model achieves a final portfolio value significantly higher than the best PPO model, with better risk-adjusted returns:
+The DQN policy adopts a gradual approach, consistently buying with available cash in the early phases and then switching to a holding strategy once the position approaches maximum and cash reserves are depleted. This behavior demonstrates the agent's ability to learn an effective capital allocation strategy.
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Metric} & \textbf{Best DQN} & \textbf{Best PPO} \\
-\hline
-Final Portfolio & \$104,751.12 & \$103,524.86 \\
-ROI & 4.75\% & 3.52\% \\
-Sharpe Ratio & 1.92 & 1.43 \\
-Win Rate & 62.85\% & 58.21\% \\
-Maximum Drawdown & 2.14\% & 3.08\% \\
-\hline
-\end{tabular}
-\caption{Performance comparison between best DQN and PPO models}
-\end{table}
+\subsubsection{PPO Policy (Seed 1000, ROI: 6.16\%)}
+In contrast, the PPO agent shows a different pattern of behavior:
+\begin{verbatim}
+Step 0: Price=$5137.08, Position=0.00, Cash=1.00 → Buy 5%
+Step 1: Price=$5135.04, Position=0.10, Cash=0.90 → Buy 5%
+Step 2: Price=$5132.99, Position=0.19, Cash=0.81 → Buy 5%
+Step 3: Price=$5130.95, Position=0.27, Cash=0.73 → Buy 5%
+Step 4: Price=$5078.65, Position=0.34, Cash=0.66 → Buy 5%
+Step 5: Price=$5104.76, Position=0.41, Cash=0.59 → Buy 5%
+Step 6: Price=$5157.36, Position=0.47, Cash=0.53 → Buy 5%
+Step 7: Price=$5123.69, Position=0.52, Cash=0.48 → Buy 5%
+Step 8: Price=$5121.77, Position=0.57, Cash=0.43 → Buy 5%
+Step 9: Price=$5119.86, Position=0.61, Cash=0.39 → Buy 5%
+...
+Step 145: Price=$5427.13, Position=1.00, Cash=$0.00 → Buy 5%
+Step 146: Price=$5399.22, Position=1.00, Cash=$0.00 → Buy 5%
+Step 147: Price=$5459.10, Position=1.00, Cash=$0.00 → Buy 5%
+Step 148: Price=$5460.58, Position=1.00, Cash=$0.00 → Buy 5%
+Step 149: Price=$5462.06, Position=1.00, Cash=$0.00 → Buy 5%
+\end{verbatim}
+
+While the PPO agent also begins with a consistent buying strategy similar to DQN, it notably continues attempting to buy even after cash is effectively depleted. This behavior suggests a suboptimal policy that fails to properly adapt to the cash constraint, potentially explaining its slightly lower performance compared to DQN.
 
 \subsection{Comparative Analysis: DQN vs PPO Performance}
 We conducted an extensive comparative analysis between DQN and PPO approaches on the same trading task. Figure \ref{fig:reward_history} shows the reward histories of both models throughout training.
@@ -224,7 +235,7 @@ Several key insights emerged from this comparison:
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.95\textwidth]{fig/Reward and Learning Analysis.png}
-  \caption{Comprehensive learning and stability analysis comparing DQN and PPO. Left: Reward histories showing raw performance. Middle: Blocked average rewards revealing distinct learning phases. Right: Rolling standard deviation of rewards illustrating training stability across time.}
+  \caption{Comprehensive learning and stability analysis comparing DQN and PPO. Left panel: Raw reward histories showing the immediate performance feedback during training. Middle panel: Blocked average rewards highlighting the distinct learning phases and overall reward trends. Right panel: Rolling standard deviation of rewards demonstrating training stability and exploration patterns across time.}
   \label{fig:learning_analysis}
 \end{figure}
 
@@ -238,29 +249,19 @@ A closer examination of the learning progression (Figure \ref{fig:learning_progr
 \end{figure}
 
 \begin{itemize}
-  \item \textbf{DQN Learning Trajectory}: The DQN model exhibits an initial positive learning trend, followed by a notable setback around phase 3, before recovering and achieving sustained improvement throughout the remainder of training. This pattern suggests exploration of new strategies before converging on optimal behavior.
+  \item \textbf{DQN Learning Trajectory}: The DQN model exhibits an initial positive learning trend, followed by a notable setback around phase 3, before recovering and achieving sustained improvement throughout the remainder of training. This pattern suggests a successful exploration-exploitation balance, where the algorithm initially explores diverse strategies before converging on optimal behavior.
   
-  \item \textbf{PPO Learning Challenges}: In contrast, PPO shows an immediate decline into negative reward territory, reaching its lowest point around phase 3 (coinciding with DQN's temporary decline). While PPO does show gradual improvement in later phases, it never achieves the consistent positive rewards demonstrated by DQN.
+  \item \textbf{PPO Learning Challenges}: In contrast, PPO shows an immediate decline into negative reward territory, reaching its lowest point around phase 3 (coinciding with DQN's temporary decline). Despite gradual improvement in later phases, PPO fails to achieve the consistent positive rewards demonstrated by DQN, indicating fundamental limitations in this environment.
 \end{itemize}
 
-These findings suggest that for this particular trading environment with partial buy/sell actions, DQN's value-based approach is better suited than PPO's policy gradient method. The discrete action space with meaningful state representations appears to be more effectively exploited by DQN's Q-learning mechanism, which directly maps state-action pairs to expected returns. In contrast, PPO's policy optimization may struggle with the delayed rewards inherent in trading environments.
-
-\subsection{Action Distribution Analysis}
-The action distribution reveals interesting behavioral differences between the algorithms:
-
-\begin{itemize}
-  \item \textbf{DQN}: Hold (62.3\%), Buy (24.8\%), Sell (12.9\%)
-  \item \textbf{PPO}: Hold (78.1\%), Buy (15.2\%), Sell (6.7\%)
-\end{itemize}
-
-DQN shows a more balanced trading approach with higher activity levels, while PPO adopts a more conservative strategy with a strong preference for holding. This difference likely contributes to DQN's superior performance, as it more actively exploits trading opportunities while managing risk through partial position adjustments.
+These findings provide strong evidence that for this particular trading environment with partial buy/sell actions and discrete action space, DQN's value-based approach offers significant advantages over PPO's policy gradient method. The discrete nature of the action space is more naturally handled by DQN's Q-learning mechanism, which directly maps state-action pairs to expected returns. Additionally, DQN's experience replay mechanism appears particularly effective at learning from the delayed rewards typical in trading environments, while PPO's policy optimization approach struggles with the same temporal credit assignment problem.
 
 \section{Conclusion}
 We have demonstrated a partial buy/sell Reinforcement Learning approach for automated trading on S\&P 500 historical data. Our comparative analysis between DQN and PPO algorithms revealed a significant performance advantage for DQN in this trading environment, with DQN consistently achieving higher rewards and demonstrating more effective learning across training phases.
 
 The distinct learning patterns observed in our DQN vs PPO comparison suggest that the value-based approach of DQN is better suited to the unique characteristics of trading environments with discrete action spaces and delayed rewards. The DQN algorithm shows superior convergence properties, more effective exploration-exploitation balance, and ultimately better financial performance across key metrics including portfolio value, ROI, Sharpe ratio, and maximum drawdown.
 
-Inspired by recent advances in hybrid deep reinforcement learning for pairs trading \citep{kim2022hybrid}, future research directions include:
+Future research directions include:
 \begin{itemize}
   \item Exploring dual-network architectures to separate trading actions from risk management.
   \item Enhancing state representations with techniques like clustering and dimensionality reduction.
@@ -272,6 +273,6 @@ Inspired by recent advances in hybrid deep reinforcement learning for pairs trad
 These avenues may further improve trading performance by providing more nuanced decision-making in dynamic market conditions.
 
 \bibliographystyle{plainnat}
-\bibliography{ref/sutton_2018_irl, ref/rana_2023_deep, ref/kim2022hybrid, ref/mnih2015human, ref/schulman2017proximal}
+\bibliography{ref/sutton_2018_irl, ref/rana_2023_deep, ref/mnih2015human, ref/schulman2017proximal}
 
 \end{document}
